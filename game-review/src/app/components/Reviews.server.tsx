@@ -13,7 +13,9 @@ type Review = {
   reviewTitle: string;
 };
 
-type ReviewsData = Review[];
+type ReviewsData = {
+  items: Review[];
+};
 
 function Reviews() {
   const [reviews, setReviews] = useState<ReviewsData | null>(null);
