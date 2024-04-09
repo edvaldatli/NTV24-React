@@ -19,10 +19,9 @@ const Review = ({
     <div className="bg-teal-900 rounded-lg text-white w-1/3 shadow-md text-pretty">
       <div className="w-full flex flex-row justify-start p-4">
         <h2 className="text-4xl font-bold p-12 truncate">{title}</h2>
-        <div className="flex flex-row ml-auto text-md text-zinc-300 bg-zinc-700 rounded-full h-10 px-2 items-center gap-1">
+        <div className="flex flex-row ml-auto text-sm font-bold text-zinc-300 bg-zinc-700 rounded-full h-10 px-2 items-center gap-1">
           {rating}/5
           <svg
-            xmlns="http://www.w3.org/2000/svg"
             height="24"
             viewBox="0 -960 960 960"
             width="24"
@@ -48,6 +47,7 @@ const Review = ({
           "{content}"
         </p>
       </div>
+      <button className="flex flex-row justify-end bg-gray-900 px-4 items-center ml-auto m-4 h-10 rounded-full shadow-md hover:bg-slate-400 transition">Read more ></button>
     </div>
   );
 };
