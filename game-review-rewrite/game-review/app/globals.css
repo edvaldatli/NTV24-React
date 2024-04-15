@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  color: white
+}
+
+nav {
+  background-color: black;
+  color: white; 
+}
+
+body {
+  background-color: rgb(62, 62, 62);
+}
+
+.wrapper {
+  padding: 20px
+}
