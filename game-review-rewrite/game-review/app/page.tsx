@@ -1,10 +1,5 @@
 "use client";
-import Image from "next/image";
-
 import Review from "./components/review";
-import AddReviewModal from "./components/addReviewModal";
-
-import { useReviews } from "./state/reviewsContext";
 
 const data = {
   title: "Counter-Strike 2",
