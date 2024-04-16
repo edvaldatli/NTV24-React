@@ -6,9 +6,16 @@ type Review = {
   content: string;
   rating: number;
   imgPath: string;
+  reviewTitle: string;
 };
 
-export default function Review({ title, content, rating, imgPath }: Review) {
+export default function Review({
+  title,
+  content,
+  rating,
+  imgPath,
+  reviewTitle,
+}: Review) {
   return (
     <div className="flex flex-col w-96 bg-zinc-900 rounded-lg">
       <div className="flex flex-row items-center gap-3 p-4 font-bold">
@@ -26,7 +33,7 @@ export default function Review({ title, content, rating, imgPath }: Review) {
         className="object-cover h-40 w-auto"
       ></Image>
       <div className="p-4 h-32 overflow-hidden">
-        <h2 className="text-lg">Pinnacle of first person shooters</h2>
+        <h2 className="text-lg font-bold">{reviewTitle}</h2>
         <p className="italic line-clamp-3">"{content}"</p>
       </div>
       <div className="flex flex-row">

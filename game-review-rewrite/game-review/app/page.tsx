@@ -8,6 +8,7 @@ import { useReviews } from "./state/reviewsContext";
 
 const data = {
   title: "Counter-Strike 2",
+  reviewTitle: "The pinnacle of first person shooters",
   content:
     "A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. A shooter, omg. ",
   rating: 4.5,
@@ -17,19 +18,18 @@ const data = {
 };
 
 export default function Home() {
-  const { isModalOpen } = useReviews();
-  const { title, content, rating, imgPath, id } = data;
+  const { title, reviewTitle, content, rating, imgPath, id } = data;
 
   return (
     <>
       <Review
         title={title}
+        reviewTitle={reviewTitle}
         content={content}
         rating={rating}
         imgPath={imgPath}
         key={id}
       />
-      {isModalOpen && <AddReviewModal />}
     </>
   );
 }

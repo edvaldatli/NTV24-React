@@ -5,6 +5,7 @@ import React, {
   useContext,
   ReactNode,
   FC,
+  useEffect,
 } from "react";
 // CONTEXT API
 
@@ -23,6 +24,8 @@ type ReviewsContextType = {
   deleteReview: (reviewToDelete: Review) => void;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  openModal: () => void;
+  closeModal: () => void;
 };
 
 type Reviews = Review[];
@@ -31,8 +34,10 @@ const ReviewsContext = createContext<ReviewsContextType>({
   reviews: [],
   addReview: () => {},
   deleteReview: () => {},
-  isModalOpen: true,
+  isModalOpen: false,
   setIsModalOpen: () => {},
+  openModal: () => {},
+  closeModal: () => {},
 });
 
 export const useReviews = () => useContext(ReviewsContext);
@@ -51,9 +56,27 @@ export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
     );
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    console.log("Modal closed");
+  };
+
+  const openModal = () => {
+    setIsModalOpen(true);
+    console.log("Modal opened");
+  };
+
   return (
     <ReviewsContext.Provider
-      value={{ reviews, addReview, deleteReview, isModalOpen, setIsModalOpen }}
+      value={{
+        reviews,
+        addReview,
+        deleteReview,
+        isModalOpen,
+        setIsModalOpen,
+        closeModal,
+        openModal,
+      }}
     >
       {children}
     </ReviewsContext.Provider>

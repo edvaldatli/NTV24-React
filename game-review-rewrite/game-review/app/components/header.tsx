@@ -3,7 +3,11 @@ import { useEffect } from "react";
 import { useReviews } from "../state/reviewsContext";
 
 export default function Header() {
-  const { isModalOpen, setIsModalOpen } = useReviews();
+  const { isModalOpen, setIsModalOpen, openModal, closeModal } = useReviews();
+
+  useEffect(() => {
+    console.log("Modal state in Header:", isModalOpen);
+  }, [isModalOpen]);
 
   return (
     <nav className="w-full h-24 flex flex-row justify-center items-center text-center">
@@ -12,7 +16,7 @@ export default function Header() {
       <button
         className="w-1/3 p-4 h-10"
         onClick={() => {
-          setIsModalOpen(!isModalOpen);
+          openModal();
         }}
       >
         Add review
