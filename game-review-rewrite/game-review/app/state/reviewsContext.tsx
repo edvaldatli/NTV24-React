@@ -6,51 +6,48 @@ import React, {
   ReactNode,
   FC,
   useEffect,
+  SetStateAction,
+  Dispatch,
 } from "react";
 // CONTEXT API
 
-type Review = {
-  title: string;
-  content: string;
-  imgpath: string;
-  rating: number;
-  reviewTitle: string;
-  id: string;
-};
+import type { ReviewType } from "../types/types";
 
 type ReviewsContextType = {
-  reviews: Review[];
-  addReview: (newReview: Review) => void;
-  deleteReview: (reviewToDelete: Review) => void;
+  reviews: ReviewType[];
+  addReview: (newReview: ReviewType) => void;
+  setReviews: (reviews: ReviewType[]) => void
+  deleteReview: (reviewToDelete: ReviewType) => void;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   openModal: () => void;
   closeModal: () => void;
 };
 
-type Reviews = Review[];
+type Reviews = ReviewType[];
 
 const ReviewsContext = createContext<ReviewsContextType>({
   reviews: [],
-  addReview: () => {},
-  deleteReview: () => {},
+  addReview: () => { },
+  setReviews: () => { },
+  deleteReview: () => { },
   isModalOpen: false,
-  setIsModalOpen: () => {},
-  openModal: () => {},
-  closeModal: () => {},
+  setIsModalOpen: () => { },
+  openModal: () => { },
+  closeModal: () => { },
 });
 
 export const useReviews = () => useContext(ReviewsContext);
 
 export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [reviews, setReviews] = useState<Reviews>([]);
+  const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const addReview = (newReview: Review) => {
+  const addReview = (newReview: ReviewType) => {
     setReviews((currentReviews) => [...currentReviews, newReview]);
   };
 
-  const deleteReview = ({ id }: Review) => {
+  const deleteReview = ({ id }: ReviewType) => {
     setReviews((currentReviews) =>
       currentReviews.filter((review) => review.id !== id)
     );
@@ -70,6 +67,7 @@ export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
     <ReviewsContext.Provider
       value={{
         reviews,
+        setReviews,
         addReview,
         deleteReview,
         isModalOpen,

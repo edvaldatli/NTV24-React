@@ -17,9 +17,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   const LayoutContent: React.FC = () => {
     const { isModalOpen, closeModal } = useReviews();
-
     return (
       <>
         {isModalOpen && (
