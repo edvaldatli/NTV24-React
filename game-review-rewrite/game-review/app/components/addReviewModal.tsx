@@ -83,7 +83,7 @@ export default function AddReviewModal() {
 
         <button
           type="submit"
-          className="text-white p-4 bg-zinc-500 rounded-md text-lg font-bold"
+          className="text-white p-4 bg-zinc-500 rounded-md text-lg font-bold mt-10"
         >
           Add Review
         </button>
