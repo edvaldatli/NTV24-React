@@ -2,6 +2,7 @@ import PocketBase from "pocketbase";
 import type { ReviewType } from '../types/types'
 
 import { useReviews } from "../state/reviewsContext";
+import { Trykker } from "next/font/google";
 
 const DEFAULT_IMAGE =
   "https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png";
@@ -37,7 +38,9 @@ export const addReview = async ({
   rating,
   reviewTitle,
 }: ReviewType) => {
-  const { reviews, setReviews } = useReviews();
+  if(imgpath === ''){
+    imgpath = DEFAULT_IMAGE;
+  }
   try {
     const data = {
       title,
@@ -49,11 +52,19 @@ export const addReview = async ({
 
     const res: ReviewType = await pb.collection("reviews").create(data);
 
-    setReviews([...reviews, res])
-    console.log(res) // LOGGGG
     return res;
   } catch (error) {
     console.error("Failed to add review", error);
     throw error;
   }
 };
+
+export const deleteReview = async (id: string) => {
+  try {
+    const res = await pb.collection('reviews').delete(id);
+
+    return res
+  } catch (e) {
+    throw Error('Failed deleting review');
+  }
+}

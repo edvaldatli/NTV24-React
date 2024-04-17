@@ -15,9 +15,9 @@ import type { ReviewType } from "../types/types";
 
 type ReviewsContextType = {
   reviews: ReviewType[];
-  addReview: (newReview: ReviewType) => void;
-  setReviews: (reviews: ReviewType[]) => void
-  deleteReview: (reviewToDelete: ReviewType) => void;
+  addReviewLocal: (newReview: ReviewType) => void;
+  setReviews: (reviews: ReviewType[]) => void;
+  deleteReviewLocal: (reviewToDelete: ReviewType) => void;
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   openModal: () => void;
@@ -28,13 +28,13 @@ type Reviews = ReviewType[];
 
 const ReviewsContext = createContext<ReviewsContextType>({
   reviews: [],
-  addReview: () => { },
-  setReviews: () => { },
-  deleteReview: () => { },
+  addReviewLocal: () => {},
+  setReviews: () => {},
+  deleteReviewLocal: () => {},
   isModalOpen: false,
-  setIsModalOpen: () => { },
-  openModal: () => { },
-  closeModal: () => { },
+  setIsModalOpen: () => {},
+  openModal: () => {},
+  closeModal: () => {},
 });
 
 export const useReviews = () => useContext(ReviewsContext);
@@ -43,11 +43,12 @@ export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const addReview = (newReview: ReviewType) => {
-    setReviews((currentReviews) => [...currentReviews, newReview]);
+  const addReviewLocal = (newReview: ReviewType) => {
+    console.log("Add Review ran inside reviews context");
+    setReviews((currentReviews) => [newReview, ...currentReviews]);
   };
 
-  const deleteReview = ({ id }: ReviewType) => {
+  const deleteReviewLocal = ({ id }: ReviewType) => {
     setReviews((currentReviews) =>
       currentReviews.filter((review) => review.id !== id)
     );
@@ -68,8 +69,8 @@ export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
       value={{
         reviews,
         setReviews,
-        addReview,
-        deleteReview,
+        addReviewLocal,
+        deleteReviewLocal,
         isModalOpen,
         setIsModalOpen,
         closeModal,
