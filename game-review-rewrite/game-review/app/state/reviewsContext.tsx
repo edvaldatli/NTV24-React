@@ -18,10 +18,14 @@ type ReviewsContextType = {
   addReviewLocal: (newReview: ReviewType) => void;
   setReviews: (reviews: ReviewType[]) => void;
   deleteReviewLocal: (reviewToDelete: ReviewType) => void;
-  isModalOpen: boolean;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isAddReviewModalOpen: boolean;
+  setisAddReviewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isReviewModalOpen: boolean;
+  setisReviewModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   openModal: () => void;
   closeModal: () => void;
+  editMode: boolean;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type Reviews = ReviewType[];
@@ -31,17 +35,24 @@ const ReviewsContext = createContext<ReviewsContextType>({
   addReviewLocal: () => {},
   setReviews: () => {},
   deleteReviewLocal: () => {},
-  isModalOpen: false,
-  setIsModalOpen: () => {},
+  isAddReviewModalOpen: false,
+  setisAddReviewModalOpen: () => {},
+  isReviewModalOpen: false,
+  setisReviewModalOpen: () => {},
   openModal: () => {},
   closeModal: () => {},
+  editMode: false,
+  setEditMode: () => {},
 });
 
 export const useReviews = () => useContext(ReviewsContext);
 
 export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [reviews, setReviews] = useState<ReviewType[]>([]);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isAddReviewModalOpen, setisAddReviewModalOpen] =
+    useState<boolean>(false);
+  const [isReviewModalOpen, setisReviewModalOpen] = useState<boolean>(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
   const addReviewLocal = (newReview: ReviewType) => {
     console.log("Add Review ran inside reviews context");
@@ -55,12 +66,14 @@ export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);
+    setisAddReviewModalOpen(false);
+    setisReviewModalOpen(false);
     console.log("Modal closed");
   };
 
   const openModal = () => {
-    setIsModalOpen(true);
+    setisAddReviewModalOpen(true);
+    setisReviewModalOpen(true);
     console.log("Modal opened");
   };
 
@@ -71,10 +84,14 @@ export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
         setReviews,
         addReviewLocal,
         deleteReviewLocal,
-        isModalOpen,
-        setIsModalOpen,
+        isAddReviewModalOpen,
+        setisAddReviewModalOpen,
+        isReviewModalOpen,
+        setisReviewModalOpen,
         closeModal,
         openModal,
+        editMode,
+        setEditMode,
       }}
     >
       {children}

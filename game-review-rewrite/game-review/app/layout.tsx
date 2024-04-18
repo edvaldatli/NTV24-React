@@ -1,5 +1,4 @@
 "use client";
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ReviewsProvider } from "./state/reviewsContext";
@@ -7,7 +6,7 @@ import { useReviews } from "./state/reviewsContext";
 
 import Header from "./components/header";
 import AddReviewModal from "./components/addReviewModal";
-import { ReactNode } from "react";
+import { Suspense } from "react";
 import ModalOverlay from "./components/modalOverlay";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,18 +16,23 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const Loading = () => {
+    return "LOading...";
+  };
 
   const LayoutContent: React.FC = () => {
-    const { isModalOpen, closeModal } = useReviews();
+    const { isAddReviewModalOpen } = useReviews();
     return (
       <>
-        {isModalOpen && (
+        {isAddReviewModalOpen && (
           <ModalOverlay>
             <AddReviewModal />
           </ModalOverlay>
         )}
         <Header />
-        <div className="wrapper">{children}</div>
+        <Suspense fallback={Loading()}>
+          <div className="wrapper">{children}</div>
+        </Suspense>
       </>
     );
   };
