@@ -20,17 +20,17 @@ export default function AddReviewModal() {
     try {
       const newReview = await addReview(data);
       addReviewLocal(newReview);
-    } catch (error) {}
+    } catch (error) { }
   }
 
   return (
     <>
-      <h1 className="text-3xl font-bold text-black text-center">
+      <h1 className="text-3xl font-bold text-white text-center">
         Add new review
       </h1>
       <form
         onSubmit={onSubmit}
-        className="text-zinc-400 p-4 flex flex-col w-full gap-2"
+        className="text-zinc-300 p-4 flex flex-col w-full gap-2"
       >
         <div>
           <label htmlFor="title">Name of video game</label>
@@ -38,7 +38,7 @@ export default function AddReviewModal() {
             type="text"
             name="title"
             id="title"
-            className="w-full border-b-2 border-black text-2xl text-black"
+            className="w-full border-b-2 border-black text-2xl text-black rounded-lg"
           />
         </div>
         <div>
@@ -47,7 +47,7 @@ export default function AddReviewModal() {
             type="text"
             name="reviewTitle"
             id="reviewTitle"
-            className="w-full border-b-2 border-black text-2xl text-black"
+            className="w-full border-b-2 border-black text-2xl text-black rounded-lg"
           />
         </div>
         <div>
@@ -56,7 +56,7 @@ export default function AddReviewModal() {
             name="content"
             id="content"
             rows={6}
-            className="w-full border-b-2 border-black text-black"
+            className="w-full border-b-2 border-black text-black rounded-lg"
           />
         </div>
         <div>
@@ -65,7 +65,7 @@ export default function AddReviewModal() {
             type="url"
             name="imgpath"
             id="imgpath"
-            className="w-full border-b-2 border-black text-2xl text-black"
+            className="w-full border-b-2 border-black text-2xl text-black rounded-lg"
           />
         </div>
         <div>
@@ -77,7 +77,7 @@ export default function AddReviewModal() {
             step={0.1}
             name="rating"
             id="rating"
-            className="w-full border-b-2 border-black text-2xl text-black"
+            className="w-full border-b-2 border-black text-2xl text-black rounded-lg"
           />
         </div>
 
