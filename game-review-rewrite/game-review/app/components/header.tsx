@@ -15,7 +15,6 @@ export default function Header() {
   };
 
   useEffect(() => {
-    console.log("Modal state in Header:", isAddReviewModalOpen);
   }, [isAddReviewModalOpen]);
 
   return (

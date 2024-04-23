@@ -10,7 +10,6 @@ const DEFAULT_IMAGE =
 const pb = new PocketBase("http://127.0.0.1:8090");
 
 export const getAllReviews = async (): Promise<ReviewType[]> => {
-  console.log('called')
   try {
     const records = await pb.collection("reviews").getFullList({
       sort: "-created",
@@ -38,7 +37,7 @@ export const addReview = async ({
   rating,
   reviewTitle,
 }: ReviewType) => {
-  if(imgpath === ''){
+  if (imgpath === '') {
     imgpath = DEFAULT_IMAGE;
   }
   try {

@@ -16,7 +16,6 @@ export default function AddReviewModal() {
       imgpath: event.target.imgpath.value,
       rating: event.target.rating.value,
     };
-    console.log("ADDREVIEWMODAL");
     try {
       const newReview = await addReview(data);
       addReviewLocal(newReview);

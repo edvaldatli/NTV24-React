@@ -32,17 +32,17 @@ type Reviews = ReviewType[];
 
 const ReviewsContext = createContext<ReviewsContextType>({
   reviews: [],
-  addReviewLocal: () => {},
-  setReviews: () => {},
-  deleteReviewLocal: () => {},
+  addReviewLocal: () => { },
+  setReviews: () => { },
+  deleteReviewLocal: () => { },
   isAddReviewModalOpen: false,
-  setisAddReviewModalOpen: () => {},
+  setisAddReviewModalOpen: () => { },
   isReviewModalOpen: false,
-  setisReviewModalOpen: () => {},
-  openModal: () => {},
-  closeModal: () => {},
+  setisReviewModalOpen: () => { },
+  openModal: () => { },
+  closeModal: () => { },
   editMode: false,
-  setEditMode: () => {},
+  setEditMode: () => { },
 });
 
 export const useReviews = () => useContext(ReviewsContext);
@@ -55,7 +55,6 @@ export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
 
   const addReviewLocal = (newReview: ReviewType) => {
-    console.log("Add Review ran inside reviews context");
     setReviews((currentReviews) => [newReview, ...currentReviews]);
   };
 
@@ -68,13 +67,11 @@ export const ReviewsProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const closeModal = () => {
     setisAddReviewModalOpen(false);
     setisReviewModalOpen(false);
-    console.log("Modal closed");
   };
 
   const openModal = () => {
     setisAddReviewModalOpen(true);
     setisReviewModalOpen(true);
-    console.log("Modal opened");
   };
 
   return (

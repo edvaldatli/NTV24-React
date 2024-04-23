@@ -1,6 +1,7 @@
 import { useReviews } from "../state/reviewsContext";
 import Review from "./review";
 import ModalOverlay from "./modalOverlay";
+import ReviewModal from './reviewModal'
 
 import { getAllReviews } from "../data/data";
 import { MouseEventHandler, useEffect, useState } from "react";
@@ -11,32 +12,10 @@ import type { ReviewType } from "../types/types";
 
 
 export default function Reviews() {
-    const { isReviewModalOpen, setisReviewModalOpen } = useReviews()
     const [modalContent, setModalContent] = useState<ReviewType>();
-
+    const { isReviewModalOpen, setisReviewModalOpen } = useReviews()
     const { reviews, setReviews } = useReviews();
 
-    function ReviewModal({ id, title, reviewTitle, content, imgpath, rating }: ReviewType) {
-        return (
-            <div className="flex flex-col justify-center items-center gap-4 text-neutral-300 max-w-xl">
-                <div className="flex flex-row justify-between items-center w-full rounded-full bg-slate-600 p-4">
-                    <h2 className="font-bold text-xl">{title}</h2>
-                    <h3 className=" font-bold text-right "><span className="text-lg">{rating}</span> rating</h3>
-                </div>
-                <div className="flex flex-row gap-2">
-                    <Image
-                        src={imgpath}
-                        alt="Image of game"
-                        width={400}
-                        height={400}
-                        className="rounded-md"
-                    />
-                </div>
-                <h2 className="font-bold text-2xl text-neutral-300">{reviewTitle}</h2>
-                <p className="p-4">{content}</p>
-            </div>
-        )
-    }
 
     function handleModalClick(e: React.MouseEvent) {
         const findId = e.target.id;
