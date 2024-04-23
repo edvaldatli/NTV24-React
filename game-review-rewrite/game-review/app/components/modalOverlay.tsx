@@ -39,7 +39,7 @@ const ModalOverlay: React.FC<PropsWithChildren<{}>> = ({ children }) => {
     >
       <div
         ref={modalRef}
-        className="bg-neutral-700 p-20 rounded-lg shadow-lg drop-shadow-lg h-4/5 overflow-auto"
+        className="bg-neutral-700 p-20 rounded-lg shadow-lg drop-shadow-lg h-4/5 w-1/2 overflow-auto"
       >
         {children}
       </div>

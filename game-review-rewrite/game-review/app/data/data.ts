@@ -30,6 +30,27 @@ export const getAllReviews = async (): Promise<ReviewType[]> => {
   }
 };
 
+export const getTop5Titles = async (): Promise<ReviewType[]> => {
+  try {
+    const records = await pb.collection('reviews').getFullList({
+      sort: "-rating"
+    });
+
+    const result: ReviewType[] = records.map((record) => ({
+      id: record.id,
+      title: record.title,
+      content: record.content,
+      imgpath: record.imgpath,
+      rating: record.rating,
+      reviewTitle: record.reviewTitle,
+    }));
+    return result.splice(0, 5);
+  } catch (error) {
+    console.error('Failed to fetch reviews:', error);
+    throw error;
+  }
+}
+
 export const addReview = async ({
   title,
   content,

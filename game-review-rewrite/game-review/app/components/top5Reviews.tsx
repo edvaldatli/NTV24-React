@@ -3,29 +3,46 @@ import Review from "./review";
 import ModalOverlay from "./modalOverlay";
 import ReviewModal from './reviewModal'
 
-import { getAllReviews } from "../data/data";
+import { getAllReviews, getTop5Titles } from "../data/data";
 import { MouseEventHandler, useEffect, useState } from "react";
+import { motion, AnimatePresence } from 'framer-motion'
 
 import Image from 'next/image'
 
 import type { ReviewType } from "../types/types";
 
+const variants = {
+    hidden: { opacity: 0, y: 0 },
+    visible: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: 0 }
+};
 
-export default function Reviews() {
-    const [modalContent, setModalContent] = useState<ReviewType>();
+
+export default function Top5Reviews() {
+    const [modalContent, setModalContent] = useState<ReviewType>({
+        id: '0',
+        title: 'not initialized',
+        content: 'not initialized',
+        reviewTitle: 'notInitialized',
+        rating: 0,
+        imgpath: ''
+    });
     const { isReviewModalOpen, setisReviewModalOpen } = useReviews()
     const { reviews, setReviews } = useReviews();
 
 
     function handleModalClick(e: React.MouseEvent) {
-        const findId = e.target.id;
+        if (e.target.id === 'delete') {
+            return
+        }
+        const findId = e.currentTarget.id;
         const clickedReview = reviews.filter(review => review.id === findId)
         setModalContent(clickedReview[0])
         setisReviewModalOpen(true)
     }
 
     const fetchReviews = async () => {
-        const result = await getAllReviews();
+        const result = await getTop5Titles();
         setReviews(result);
     };
 
@@ -54,12 +71,19 @@ export default function Reviews() {
     return (
         <>
             <div className="flex flex-wrap gap-4 justify-center">{ReviewCards}</div>
-            {
-                isReviewModalOpen &&
-                (<ModalOverlay>
-                    <ReviewModal title={modalContent.title} reviewTitle={modalContent.reviewTitle} content={modalContent.content} imgpath={modalContent.imgpath} rating={modalContent.rating} id={modalContent.id} />
-                </ModalOverlay>)
-            }
+
+            <AnimatePresence>
+                {isReviewModalOpen &&
+                    (
+                        <motion.div variants={variants} initial="hidden" animate="visible" exit="exit" key="modal">
+                            <ModalOverlay>
+                                <ReviewModal title={modalContent.title} reviewTitle={modalContent.reviewTitle} content={modalContent.content} imgpath={modalContent.imgpath} rating={modalContent.rating} id={modalContent.id} />
+                            </ModalOverlay>
+                        </motion.div>
+                    )
+                }
+            </AnimatePresence>
+
         </>
     );
 }

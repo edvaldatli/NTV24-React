@@ -1,6 +1,6 @@
 "use client";
 import { Suspense } from "react";
-import Reviews from "./components/reviews";
+import Reviews from "./components/allReviews";
 
 export default function Home() {
   return (
