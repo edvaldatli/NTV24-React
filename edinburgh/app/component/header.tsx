@@ -1,7 +1,14 @@
 import Image from "next/image";
 import logo from "../assets/images/logo.png";
+import {useState} from "react"
 
 export default function Header() {
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+
+  function toggleDrawer () {
+    setDrawerOpen(!drawerOpen);
+  }
+
   return (
     <>
       {/* big nav */}
@@ -22,7 +29,7 @@ export default function Header() {
       {/* small nav */}
       <div className="md:hidden absolute">
         <div className="flex flex-row bg-dark h-20">
-          <button className="absolute group left-2 top-4 z-10">
+          <button className="absolute group left-2 top-4 z-10" onClick={toggleDrawer} aria-label="Toggle navigation">
             <div className="relative flex overflow-hidden items-center justify-center rounded-full w-[45px] h-[45px] transform transition-all bg-dark ring-0 ring-gray-300 hover:ring-8 group-focus:ring-4 ring-opacity-30 duration-200 shadow-md">
               <div className="flex flex-col justify-between w-[20px] h-[20px] transform transition-all duration-300 origin-center overflow-hidden">
                 <div className="bg-white h-[2px] w-7 transform transition-all duration-300 origin-left group-focus:translate-y-6 delay-100"></div>
@@ -41,17 +48,21 @@ export default function Header() {
           <Image
             alt="logo"
             src={logo}
-            height={500}
-            width={500}
+            height={50}
+            width={50}
             style={{ objectFit: "contain" }}
+            layout="responsive"
             className="w-screen"
           />
         </div>
-        <div className="w-2/3 h-screen fixed bg-dark-secondary">
-          <div className="flex flex-col"></div>
-        </div>
+        {/*Drawer */}
+        {drawerOpen &&
+          <div className="w-2/3 h-screen fixed bg-dark-secondary">
+            <div className="flex flex-col"></div>
+          </div>
+        }
       </div>
-      {/*Drawer */}
+      
     </>
   );
 }
