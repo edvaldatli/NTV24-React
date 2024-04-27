@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 :root {
+  background-color: rgb(60, 81, 139);
   color: rgb(238, 238, 238)
 }
 /*
